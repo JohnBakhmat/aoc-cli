@@ -1,5 +1,5 @@
+use chrono::Datelike;
 use clap::{Parser, Subcommand};
-use std::path::Path;
 
 mod commands;
 
@@ -48,6 +48,19 @@ async fn main() -> anyhow::Result<()> {
                     }
                 }
             };
+
+            let current_year = chrono::Utc::now().year() as u16;
+
+            match year {
+                YearInput::Specific(y) => {
+                    assert!(
+                        y >= 2015 && y <= current_year,
+                        "Year must be between 2015 and the current year"
+                    )
+                }
+                _ => {}
+            }
+
             commands::init_command(path, year).await
         }
     }
