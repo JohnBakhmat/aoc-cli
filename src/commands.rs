@@ -54,7 +54,9 @@ pub async fn init_command(path: &str, year: YearInput) -> anyhow::Result<()> {
         for day in 1..=25 {
             let day_path = year_path.join(format!("day{:02}", day));
             fs::create_dir(&day_path)?;
-            let input_path = day_path.join("input.txt");
+            let input_path = day_path.join("input.1.txt");
+            fs::File::create(&input_path)?;
+            let input_path = day_path.join("input.2.txt");
             fs::File::create(&input_path)?;
         }
     }
