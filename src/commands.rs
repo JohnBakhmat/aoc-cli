@@ -13,7 +13,6 @@ pub async fn init_command(path: &str, year: YearInput) -> anyhow::Result<()> {
     let is_empty = path.read_dir()?.next().is_none();
 
     let current_year = chrono::Utc::now().year() as u16;
-
     match year {
         YearInput::All => {
             assert!(is_empty, "Directory must be empty");
@@ -27,6 +26,12 @@ pub async fn init_command(path: &str, year: YearInput) -> anyhow::Result<()> {
         }
         YearInput::Specific(y) => {
             let year_path = path.join(y.to_string());
+
+            assert!(
+                y >= 2015 && y <= current_year,
+                "Year must be between 2015 and the current year"
+            );
+
             assert!(
                 !year_path.exists(),
                 "Directory for year {} already exists",
