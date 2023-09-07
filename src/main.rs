@@ -1,4 +1,7 @@
 use clap::{Parser, Subcommand};
+use std::path::Path;
+
+mod commands;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -10,16 +13,42 @@ struct CLI {
 
 #[derive(Subcommand)]
 enum Commands {
-    Init { path: Option<String> },
+    Init {
+        path: Option<String>,
+        year: Option<String>,
+    },
 }
 
-fn main() {
+#[derive(Debug)]
+pub enum YearInput {
+    Current,
+    Specific(u16),
+    All,
+}
+
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
     let cli = CLI::parse();
 
     match &cli.command {
-        None => println!("No command"),
-        Some(Commands::Init { path }) => {
-            println!("Init command with path: {:?}", path);
+        None => Ok(println!("No command")),
+        Some(Commands::Init { path, year }) => {
+            let path = match &path {
+                None => "./",
+                Some(p) => p,
+            };
+
+            let year = match &year {
+                None => YearInput::Current,
+                Some(y) => {
+                    if y == "all" {
+                        YearInput::All
+                    } else {
+                        YearInput::Specific(y.parse().unwrap())
+                    }
+                }
+            };
+            commands::init_command(path, year).await
         }
     }
 }
