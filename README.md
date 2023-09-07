@@ -21,3 +21,4 @@ aoc-cli init ./aoc 2017
 * `path` - is optional and defaults to `./` but is **VERY RECOMMENDED**
 * `year` - is optional and defaults to the current year, but also accepts specific years, like `2017` or `2020`. If you want to create folders for all years, use `all`.
 
+## License
