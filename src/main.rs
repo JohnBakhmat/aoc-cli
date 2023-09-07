@@ -28,7 +28,7 @@ pub enum YearInput {
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let cli = CLI::parse();
-
+    println!("\n\n");
     match &cli.command {
         None => Ok(println!("No command")),
         Some(Commands::Init { path, year }) => {

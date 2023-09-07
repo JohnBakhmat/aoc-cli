@@ -46,6 +46,8 @@ pub async fn init_command(path: &str, year: YearInput) -> anyhow::Result<()> {
         YearInput::Specific(y) => y..=y,
     };
 
+    println!("Creating directory structure...");
+
     for year in year_range {
         let year_path = path.join(year.to_string());
         fs::create_dir(&year_path)?;
@@ -57,7 +59,11 @@ pub async fn init_command(path: &str, year: YearInput) -> anyhow::Result<()> {
         }
     }
 
-    println!("Creating directory structure...");
+    println!("Successfully created directory structure!");
+    println!("Next steps:");
+    println!("1. cd {}", path.display());
+    println!("2. aoc-cli add deno");
+    println!("Or do whatever you want with the directory structure! Im not a cop!");
 
     Ok(())
 }
