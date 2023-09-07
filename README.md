@@ -12,13 +12,20 @@ cargo install --git https://github.com/johnbakhmat/aoc-cli.git
 
 ## Usage
 
-1. First initialize the project with `aoc-cli init <path> <year>`
+Command belove will create folder structure for **current year**.
+```
+mkdir ./aoc
+cd ./aoc
+aoc-cli init
+```
+
+You can also initialize the project with `aoc-cli init <path> <year>`
 
 ```fish
 aoc-cli init ./aoc 2017
 ```
 
-* `path` - is optional and defaults to `./` but is **VERY RECOMMENDED**
-* `year` - is optional and defaults to the current year, but also accepts specific years, like `2017` or `2020`. If you want to create folders for all years, use `all`.
+* `path` - is optional and defaults to `./` (but if you specify year it is **REQUIRED**)
+* `year` - is optional and defaults to the current year, but also accepts specific years, like `2017` or `2020` (Advent of Code started at `2015` so its a bottom limit). If you want to create folders for all years, use `all`.
 
 ## License
