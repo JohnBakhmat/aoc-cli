@@ -1,6 +1,7 @@
 use clap::{Parser, Subcommand};
 
-mod commands;
+mod add;
+mod init;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -15,6 +16,10 @@ enum Commands {
     Init {
         path: Option<String>,
         year: Option<String>,
+    },
+    Add {
+        lang: String,
+        path: Option<String>,
     },
 }
 
@@ -48,7 +53,15 @@ async fn main() -> anyhow::Result<()> {
                 }
             };
 
-            commands::init_command(path, year).await
+            init::run(path, year).await
+        }
+        Some(Commands::Add { lang, path }) => {
+            let path = match &path {
+                None => "./",
+                Some(p) => p,
+            };
+
+            add::run(path, lang).await
         }
     }
 }

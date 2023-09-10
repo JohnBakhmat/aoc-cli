@@ -4,7 +4,7 @@ use crate::YearInput;
 use std::fs;
 use std::path::Path;
 
-pub async fn init_command(path: &str, year: YearInput) -> anyhow::Result<()> {
+pub async fn run(path: &str, year: YearInput) -> anyhow::Result<()> {
     let path = Path::new(path);
     if !path.exists() {
         fs::create_dir(path)?;
