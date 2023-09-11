@@ -1,7 +1,8 @@
 use clap::{Parser, Subcommand};
-
+#[allow(unused)]
 mod add;
 mod init;
+mod temp;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
