@@ -93,7 +93,6 @@ dependencies = [
  "anyhow",
  "chrono",
  "clap",
- "directories",
  "dirs",
  "fs_extra",
  "git2",
@@ -228,15 +227,6 @@ name = "core-foundation-sys"
 version = "0.8.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e496a50fda8aacccc86d7529e2c1e0892dbd0f898a6b5645b5561b89c3210efa"
-
-[[package]]
-name = "directories"
-version = "5.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a49173b84e034382284f27f1af4dcbbd231ffa358c0fe316541a7337f376a35"
-dependencies = [
- "dirs-sys",
-]
 
 [[package]]
 name = "dirs"
