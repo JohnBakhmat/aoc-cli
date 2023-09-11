@@ -14,8 +14,7 @@ pub async fn cache_template() -> anyhow::Result<()> {
     }
 
     let repo = Repository::open(&template_dir)?;
-    let mut remote = repo.find_remote("origin")?;
-    remote.fetch(&["main"], None, None)?;
+    crate::pull::run(&repo, "origin", "main")?;
 
     Ok(())
 }

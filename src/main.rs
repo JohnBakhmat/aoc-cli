@@ -2,6 +2,7 @@ use clap::{Parser, Subcommand};
 #[allow(unused)]
 mod add;
 mod init;
+mod pull;
 mod temp;
 
 #[derive(Parser)]
