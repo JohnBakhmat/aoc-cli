@@ -9,11 +9,15 @@ pub async fn run(path: &str, lang: &str) -> anyhow::Result<()> {
     cache_template().await?;
     let template = get_template(lang).await?;
 
-    let folders = glob(&format!("{}/**/day*", path))?
+    let path = Path::new(path).canonicalize()?;
+
+    println!("Adding {} to folders in {}", lang, path.to_string_lossy());
+
+    let folders = glob(&format!("{}/**/day*", path.to_string_lossy()))?
         .map(|x| x.unwrap())
         .collect::<Vec<_>>();
 
-    let already_exists = glob(&format!("{}/**/day*/{}", path, lang))?
+    let already_exists = glob(&format!("{}/**/day*/{}", path.to_string_lossy(), lang))?
         .map(|x| x.unwrap())
         .collect::<Vec<_>>();
 
